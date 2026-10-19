@@ -10,24 +10,12 @@
       // Thêm ảnh vào assets/images rồi sửa src ở từng mục bên dưới.
       // Hỗ trợ .jpg, .jpeg, .png, .webp và .svg.
       photos: [
-        {
-          src: "assets/images/flower.svg",
-          alt: "Minh họa bó hoa pastel",
-          title: "Xinh như hoa 🌷",
-          caption: "Mong ngày nào của cậu cũng nở rộ những điều vui vẻ."
-        },
-        {
-          src: "assets/images/rose.svg",
-          alt: "Minh họa những bông hoa hồng",
-          title: "Ngọt ngào một chút 🍓",
-          caption: "Thêm chút đường vào những ngày bình thường nhất."
-        },
-        {
-          src: "assets/images/cat.svg",
-          alt: "Minh họa một bé mèo đáng yêu",
-          title: "Nạp năng lượng cute 🐱",
-          caption: "Một chiếc ảnh dễ thương để cậu mỉm cười nè."
-        }
+        { src: "assets/images/anh1.jpg", alt: "Ảnh kỷ niệm 1", title: "Kỷ niệm 1 🌷", caption: "Một khoảnh khắc dễ thương ♡" },
+        { src: "assets/images/anh2.jpg", alt: "Ảnh kỷ niệm 2", title: "Kỷ niệm 2 💗", caption: "Một khoảnh khắc dễ thương ♡" },
+        { src: "assets/images/anh3.jpg", alt: "Ảnh kỷ niệm 3", title: "Kỷ niệm 3 ✨", caption: "Một khoảnh khắc dễ thương ♡" },
+        { src: "assets/images/anh5.jpg", alt: "Ảnh kỷ niệm 4", title: "Kỷ niệm 4 🌸", caption: "Một khoảnh khắc dễ thương ♡" },
+        { src: "assets/images/anh7.jpg", alt: "Ảnh kỷ niệm 5", title: "Kỷ niệm 5 🎀", caption: "Một khoảnh khắc dễ thương ♡" },
+        { src: "assets/images/anh8.jpg", alt: "Ảnh kỷ niệm 6", title: "Kỷ niệm 6 💕", caption: "Một khoảnh khắc dễ thương ♡" }
       ]
     };
 
@@ -37,63 +25,49 @@
     document.getElementById('signature').textContent = 'Từ ' + CONFIG.yourName + ' ♡';
     document.getElementById('giftTitle').textContent = 'Chúc mừng ngày của ' + CONFIG.herName + '!';
 
-    // Tạo album từ CONFIG.photos. Ảnh được phục vụ trực tiếp từ thư mục của website.
+    // Ảnh hoạt động: cho phép thay ảnh ngay trên trang và đồng bộ cả album/bó hoa.
+    const PHOTO_STORAGE_KEY = 'cute20Photos-v2';
+    const isPhoto = photo => photo && typeof photo === 'object' && typeof photo.src === 'string' && photo.src.length > 0;
+    let activePhotos = (() => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(PHOTO_STORAGE_KEY) || 'null');
+        if (Array.isArray(saved) && saved.length && saved.every(isPhoto)) return saved;
+        return CONFIG.photos.map(photo => ({ ...photo }));
+      }
+      catch { return CONFIG.photos.map(photo => ({ ...photo })); }
+    })();
+    const fallbackPhotos = [{ src: 'assets/images/flower.svg', alt: 'Minh họa hoa pastel', title: 'Một chút dịu dàng ♡', caption: '' }];
+
+    function renderPhotoViews() {
+      memoryGrid.innerHTML = '';
+      activePhotos.forEach((photo, index) => {
+        const card = document.createElement('article');
+        card.className = 'memory';
+        const tilts = [-2, 2, -1, 1, -1.5, 1.5];
+        card.style.setProperty('--tilt', tilts[index % tilts.length] + 'deg');
+        const image = document.createElement('img');
+        image.loading = 'lazy'; image.src = photo.src; image.alt = photo.alt || photo.title || 'Ảnh kỷ niệm dễ thương';
+        image.addEventListener('error', () => { image.alt = 'Không tải được ảnh'; image.classList.add('image-load-failed'); }, { once: true });
+        const title = document.createElement('div'); title.className = 'memory-title'; title.textContent = photo.title || 'Một điều dễ thương ♡';
+        const caption = document.createElement('p'); caption.className = 'memory-caption'; caption.textContent = photo.caption || '';
+        card.append(image, title, caption); memoryGrid.appendChild(card);
+      });
+
+      bouquetPhotoFan.innerHTML = '';
+      const sourcePhotos = activePhotos.length ? activePhotos : fallbackPhotos;
+      Array.from({ length: 6 }, (_, index) => sourcePhotos[index % sourcePhotos.length]).forEach((photo, index) => {
+        const frame = document.createElement('figure'); frame.className = 'bouquet-photo';
+        frame.style.setProperty('--delay', (index * 100) + 'ms');
+        frame.setAttribute('aria-label', photo.alt || photo.title || 'Ảnh dễ thương');
+        const image = document.createElement('img'); image.src = photo.src; image.alt = photo.alt || 'Ảnh trong bó hoa'; image.loading = 'eager'; image.decoding = 'async';
+        image.addEventListener('error', () => { image.src = 'assets/images/flower.svg'; image.alt = 'Minh họa hoa pastel'; }, { once: true });
+        frame.appendChild(image); bouquetPhotoFan.appendChild(frame);
+      });
+    }
+
     const memoryGrid = document.getElementById('memoryGrid');
-    CONFIG.photos.forEach((photo, index) => {
-      const card = document.createElement('article');
-      card.className = 'memory';
-      const tilts = [-2, 2, -1, 1, -1.5, 1.5];
-      card.style.setProperty('--tilt', (tilts[index % tilts.length]) + 'deg');
-
-      const image = document.createElement('img');
-      image.loading = 'lazy';
-      image.src = photo.src;
-      image.alt = photo.alt || 'Ảnh kỷ niệm dễ thương';
-      image.addEventListener('error', () => {
-        image.alt = 'Không tìm thấy ảnh: ' + photo.src;
-        image.style.display = 'none';
-        card.classList.add('image-missing');
-        const notice = document.createElement('div');
-        notice.className = 'image-missing-note';
-        notice.textContent = 'Chưa tìm thấy ảnh — kiểm tra đường dẫn trong CONFIG.photos nhé 💗';
-        card.insertBefore(notice, card.firstChild);
-      }, { once: true });
-
-      const title = document.createElement('div');
-      title.className = 'memory-title';
-      title.textContent = photo.title || 'Một điều dễ thương ♡';
-      const caption = document.createElement('p');
-      caption.className = 'memory-caption';
-      caption.textContent = photo.caption || '';
-      card.append(image, title, caption);
-      memoryGrid.appendChild(card);
-    });
-
-    // Bó hoa dùng lại các ảnh trong CONFIG.photos để bạn chỉ cần cấu hình danh sách một lần.
-    // Luôn hiển thị 6 khung để tạo hình quạt; nếu có ít ảnh, ảnh sẽ được lặp lại cho đủ khung.
     const bouquetPhotoFan = document.getElementById('bouquetPhotoFan');
-    const fallbackPhotos = [{ src: 'assets/images/flower.svg', alt: 'Minh họa hoa pastel', title: 'Một chút dịu dàng ♡' }];
-    const sourcePhotos = CONFIG.photos.length ? CONFIG.photos : fallbackPhotos;
-    const fanPhotos = Array.from({ length: 6 }, (_, index) => sourcePhotos[index % sourcePhotos.length]);
-    fanPhotos.forEach((photo, index) => {
-      const frame = document.createElement('figure');
-      frame.className = 'bouquet-photo';
-      frame.style.setProperty('--delay', (index * 100) + 'ms');
-      frame.setAttribute('aria-label', photo.alt || photo.title || 'Ảnh dễ thương');
-
-      const image = document.createElement('img');
-      image.src = photo.src;
-      image.alt = photo.alt || 'Ảnh trong bó hoa';
-      image.loading = 'eager';
-      image.decoding = 'async';
-      image.addEventListener('error', () => {
-        // Nếu ảnh bị thiếu, thay bằng minh họa có sẵn để bố cục không bị vỡ.
-        image.src = 'assets/images/flower.svg';
-        image.alt = 'Minh họa hoa pastel';
-      }, { once: true });
-      frame.appendChild(image);
-      bouquetPhotoFan.appendChild(frame);
-    });
+    renderPhotoViews();
 
     const welcomeScreen = document.getElementById('welcomeScreen');
     const letterScreen = document.getElementById('letterScreen');

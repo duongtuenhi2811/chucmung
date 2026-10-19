@@ -10,6 +10,8 @@ Một website thiệp 20/10 phong cách pastel dễ thương, viết bằng **HT
 
 ## Thêm ảnh của hai người vào website
 
+Sáu ảnh trong `assets/images/anh1.jpg`, `anh2.jpg`, `anh3.jpg`, `anh5.jpg`, `anh7.jpg` và `anh8.jpg` được dùng mặc định trong album và bó hoa. Để thay ảnh, dùng liên kết **Chỉnh ảnh ♡** nhỏ ở cuối thiệp hoặc mở `photos.html`. Ảnh được lưu trong trình duyệt hiện tại và sẽ hiện trên bó hoa cùng album ở cùng trình duyệt/thiết bị.
+
 1. Sao chép ảnh JPG, PNG hoặc WEBP vào thư mục `assets/images/`.
 2. Mở `assets/js/script.js` bằng VS Code hoặc Notepad.
 3. Tìm `CONFIG.photos`. Đổi `src` thành đường dẫn ảnh của bạn, ví dụ:
@@ -25,9 +27,9 @@ Một website thiệp 20/10 phong cách pastel dễ thương, viết bằng **HT
 
 4. Lưu file rồi tải lại `index.html` trên trình duyệt.
 
-Bạn có thể thêm bao nhiêu tấm ảnh tùy thích bằng cách thêm các mục mới vào mảng `CONFIG.photos`. **Chính những ảnh này sẽ xuất hiện ở cả album và trên bó hoa khi mở quà.** Khi bấm nút mở quà, bó hoa sẽ trồi lên trước, sau đó sáu tấm ảnh lần lượt bung ra thành hình quạt, rồi lời chúc cuối mới xuất hiện. Nếu danh sách có dưới sáu ảnh, các ảnh đầu sẽ lặp lại để giữ bố cục cân đối.
+Mảng `CONFIG.photos` chứa sáu ảnh dùng ở cả album và trên bó hoa. Khi bấm nút mở quà, bó hoa sẽ trồi lên trước, sau đó sáu tấm ảnh lần lượt bung ra thành hình quạt, rồi lời chúc cuối mới xuất hiện.
 
-Nếu chưa có ảnh riêng, dự án dùng ba hình minh họa `flower.svg`, `rose.svg` và `cat.svg` làm mặc định. Bó hoa được vẽ bằng SVG nhiều lớp cánh, có giấy gói và nơ có độ chuyển sáng; khi mở quà, bó hoa trồi lên, đung đưa nhẹ, ánh sáng lướt trên giấy gói và các cánh hoa nhỏ bay quanh. Bạn nên thay ảnh mặc định bằng ảnh thật trước khi gửi thiệp.
+Bó hoa được vẽ bằng SVG nhiều lớp cánh, có giấy gói và nơ có độ chuyển sáng; khi mở quà, bó hoa trồi lên, đung đưa nhẹ, ánh sáng lướt trên giấy gói và các cánh hoa nhỏ bay quanh.
 
 **Lưu ý đường dẫn:** tên file phải khớp chính xác, kể cả chữ hoa/chữ thường. Nên dùng tên file không dấu, chữ thường và không có dấu cách, ví dụ `ky-niem-1.jpg`. Ảnh đã commit lên GitHub có thể được người khác xem hoặc tải xuống nếu repository/website công khai.
 
@@ -107,3 +109,7 @@ qua-tang-20-10-github/
 ## Quyền riêng tư
 
 GitHub Pages là website công khai trên Internet. Bất kỳ ai có đường dẫn đều có thể mở và có thể chia sẻ tiếp; các ảnh được commit vào repository cũng có thể được tải xuống. Đừng đưa thông tin cá nhân nhạy cảm hoặc ảnh mà bạn không muốn công khai lên repository. Website này không có hệ thống đăng nhập hay giới hạn người xem.
+
+
+## Trang chỉnh ảnh riêng
+Mở liên kết **Chỉnh ảnh ♡** nhỏ ở cuối thiệp hoặc vào `photos.html` để thay ảnh. Ảnh được lưu trong localStorage của cùng trình duyệt; có thể tải JSON để sao lưu. Để ảnh xuất hiện cho người nhận trên thiết bị khác, đưa ảnh vào `assets/images/`, cập nhật `CONFIG.photos` trong `assets/js/script.js`, rồi commit/push lên GitHub.
