@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff1f5" />
+  <meta name="description" content="Một món quà nhỏ xinh dành riêng cho ngày 20/10." />
+  <title>Một món quà nhỏ dành cho cậu ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="decor-layer" id="decorLayer" aria-hidden="true"></div>
+
+  <main class="page">
+    <div class="topline"><span class="pill">🌷 20 THÁNG 10 · MỘT CHÚT DỄ THƯƠNG</span></div>
+
+    <section id="welcomeScreen" class="screen active" aria-labelledby="mainTitle">
+      <header class="hero">
+        <p class="eyebrow">Tớ có một điều nho nhỏ muốn gửi cậu…</p>
+        <h1 id="mainTitle">Có một món quà <span class="tiny-heart">♡</span><span class="script" id="heroName">dành riêng cho cậu</span></h1>
+        <p class="hero-copy">Không phải món quà to lớn gì đâu, chỉ là một góc nhỏ xinh xinh chứa đầy những lời chúc và một chút tình cảm tớ gói ghém dành riêng cho cậu. 🎀</p>
+      </header>
+
+      <div class="envelope-wrap">
+        <button class="envelope-button" id="envelopeButton" aria-label="Mở phong bì">
+          <span class="envelope-base"></span>
+          <span class="envelope-letter">Gửi cậu, bằng tất cả sự dịu dàng ♡</span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-seal">♥</span>
+        </button>
+      </div>
+      <p class="tap-note">Psst… chạm vào chiếc thư để mở bí mật nhé ✨</p>
+      <div class="center-actions"><button class="primary-btn" id="openLetterButton">Mở thư của tớ 💌</button></div>
+    </section>
+
+    <section id="letterScreen" class="screen" aria-labelledby="letterTitle">
+      <article class="letter-card">
+        <header class="letter-top">
+          <div class="mini-label">♡ Một bức thư nhỏ xíu ♡</div>
+          <h2 id="letterTitle">Gửi cậu, cô gái đặc biệt</h2>
+        </header>
+        <div class="letter-body" id="letterBody">
+          <p>Hé lô cô gái nhỏ! 🌷</p>
+          <p>Nhân ngày 20/10, tớ chúc cậu lúc nào cũng vui vẻ, xinh xắn theo cách riêng của mình và luôn được yêu thương thật nhiều. Mong những điều dịu dàng nhất sẽ tìm đến cậu, kể cả trong những ngày cậu cảm thấy mệt mỏi nhất.</p>
+          <p>Mong cậu luôn có đủ dũng khí để làm điều mình thích, đủ bình yên để ngủ ngon mỗi tối và có thật nhiều lý do để cười. Nếu hôm nay chưa ai nói với cậu điều này, thì để tớ nói nhé: <strong>cậu rất đáng quý và xứng đáng với những điều tốt đẹp.</strong> 💗</p>
+          <p>Cảm ơn cậu vì đã xuất hiện và khiến thế giới của ai đó trở nên dễ thương hơn một chút. Chúc nàng thơ của hôm nay có một ngày 20/10 ngọt ngào như kẹo bông, ấm áp như nắng sớm và lấp lánh như những vì sao.</p>
+          <p>À, đọc đến đây thì nhớ cười một cái nha. Cười lên trông cậu đáng yêu lắm đó! 🐰</p>
+        </div>
+        <div class="signature" id="signature">Từ một người muốn cậu luôn vui ♡</div>
+      </article>
+
+      <section aria-labelledby="memoriesTitle">
+        <div class="section-heading">
+          <div class="kicker">little things, lots of love</div>
+          <h2 id="memoriesTitle">Một chiếc góc nhỏ xinh 🌸</h2>
+          <p>Gửi cậu một chút hoa, một chút mềm mại và một lời nhắc rằng hôm nay cậu chính là nhân vật chính.</p>
+        </div>
+        <div class="memory-grid" id="memoryGrid" aria-live="polite"></div>
+      </section>
+
+      <div class="quote-strip">💌 <strong>Nhắc nhẹ một điều:</strong> cậu không cần phải hoàn hảo mới xứng đáng được yêu thương. Cứ là cậu thôi — thế đã đặc biệt lắm rồi. ♡</div>
+
+      <section class="gift-panel">
+        <span class="gift-emoji" aria-hidden="true">🎁</span>
+        <h3>Ơ khoan, vẫn còn một món quà!</h3>
+        <p>Tớ giấu một lời chúc cuối ở bên trong chiếc hộp này. Mở ra xem nha, nhưng phải hứa là sẽ cười đó! 🎀</p>
+        <button class="primary-btn" id="openGiftButton">Mở món quà bí mật ✨</button>
+      </section>
+      <div class="center-actions"><button class="secondary-btn" id="backButton">↶ Đọc lại từ đầu</button></div>
+      <footer class="footer-note"><span class="big-heart">♡</span>Được làm bằng một chút HTML, một chút phép màu và rất nhiều sự dễ thương.<br>Chúc cậu một ngày 20/10 thật là vui! 🌷</footer>
+    </section>
+  </main>
+
+  <div class="modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="giftTitle" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-modal" id="closeGiftButton" aria-label="Đóng món quà">×</button>
+      <div class="bouquet" aria-hidden="true">💐🎀💗</div>
+      <h2 id="giftTitle">Chúc mừng ngày của cậu!</h2>
+      <p id="giftMessage">Chúc cô gái nhỏ luôn được nâng niu, luôn gặp người tử tế, luôn có đủ bình yên trong lòng và có thật nhiều ngày hạnh phúc. Mong nụ cười của cậu sẽ ở lại thật lâu. Cậu xứng đáng với mọi điều dịu dàng nhất trên thế giới này. 💖</p>
+      <button class="primary-btn" id="finalButton">Tớ nhận được lời chúc rồi nè ♡</button>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js" defer></script>
+</body>
+</html>
