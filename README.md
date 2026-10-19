@@ -25,9 +25,11 @@ Một website thiệp 20/10 phong cách pastel dễ thương, viết bằng **HT
 
 4. Lưu file rồi tải lại `index.html` trên trình duyệt.
 
-Bạn có thể thêm bao nhiêu tấm ảnh tùy thích bằng cách thêm các mục mới vào mảng `CONFIG.photos`. Nếu chưa có ảnh riêng, ba hình minh họa `flower.svg`, `rose.svg` và `cat.svg` sẽ được dùng làm mặc định.
+Bạn có thể thêm bao nhiêu tấm ảnh tùy thích bằng cách thêm các mục mới vào mảng `CONFIG.photos`. **Chính những ảnh này sẽ xuất hiện ở cả album và trên bó hoa khi mở quà.** Khi bấm nút mở quà, bó hoa sẽ trồi lên trước, sau đó sáu tấm ảnh lần lượt bung ra thành hình quạt, rồi lời chúc cuối mới xuất hiện. Nếu danh sách có dưới sáu ảnh, các ảnh đầu sẽ lặp lại để giữ bố cục cân đối.
 
-**Lưu ý đường dẫn:** tên file phải khớp chính xác, kể cả chữ hoa/chữ thường. Nên dùng tên file không dấu, chữ thường và không có dấu cách, ví dụ `ky-niem-1.jpg`.
+Nếu chưa có ảnh riêng, dự án dùng ba hình minh họa `flower.svg`, `rose.svg` và `cat.svg` làm mặc định. Bó hoa được vẽ bằng SVG nhiều lớp cánh, có giấy gói và nơ có độ chuyển sáng; khi mở quà, bó hoa trồi lên, đung đưa nhẹ, ánh sáng lướt trên giấy gói và các cánh hoa nhỏ bay quanh. Bạn nên thay ảnh mặc định bằng ảnh thật trước khi gửi thiệp.
+
+**Lưu ý đường dẫn:** tên file phải khớp chính xác, kể cả chữ hoa/chữ thường. Nên dùng tên file không dấu, chữ thường và không có dấu cách, ví dụ `ky-niem-1.jpg`. Ảnh đã commit lên GitHub có thể được người khác xem hoặc tải xuống nếu repository/website công khai.
 
 ## Cá nhân hóa tên và lời nhắn
 
@@ -88,9 +90,14 @@ Tài liệu chính thức: [GitHub Pages Quickstart](https://docs.github.com/en/
 qua-tang-20-10-github/
 ├── index.html                 # Nội dung website
 ├── assets/
-│   ├── css/style.css          # Giao diện và hiệu ứng
-│   ├── js/script.js           # Tương tác, cấu hình tên và album ảnh
-│   └── images/                # Đặt ảnh của bạn ở đây
+│   ├── css/style.css          # Giao diện và hiệu ứng responsive
+│   ├── js/script.js           # Tương tác, cấu hình tên và danh sách ảnh
+│   └── images/
+│       ├── bouquet-wrap.svg   # Minh họa bó hoa giấy hồng và nơ
+│       ├── flower.svg         # Hình mặc định
+│       ├── rose.svg           # Hình mặc định
+│       ├── cat.svg            # Hình mặc định
+│       └── ky-niem-*.jpg      # Ảnh riêng bạn thêm vào
 ├── .github/workflows/
 │   └── deploy.yml             # Tự động triển khai GitHub Pages
 ├── .nojekyll

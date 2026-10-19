@@ -69,6 +69,32 @@
       memoryGrid.appendChild(card);
     });
 
+    // Bó hoa dùng lại các ảnh trong CONFIG.photos để bạn chỉ cần cấu hình danh sách một lần.
+    // Luôn hiển thị 6 khung để tạo hình quạt; nếu có ít ảnh, ảnh sẽ được lặp lại cho đủ khung.
+    const bouquetPhotoFan = document.getElementById('bouquetPhotoFan');
+    const fallbackPhotos = [{ src: 'assets/images/flower.svg', alt: 'Minh họa hoa pastel', title: 'Một chút dịu dàng ♡' }];
+    const sourcePhotos = CONFIG.photos.length ? CONFIG.photos : fallbackPhotos;
+    const fanPhotos = Array.from({ length: 6 }, (_, index) => sourcePhotos[index % sourcePhotos.length]);
+    fanPhotos.forEach((photo, index) => {
+      const frame = document.createElement('figure');
+      frame.className = 'bouquet-photo';
+      frame.style.setProperty('--delay', (index * 100) + 'ms');
+      frame.setAttribute('aria-label', photo.alt || photo.title || 'Ảnh dễ thương');
+
+      const image = document.createElement('img');
+      image.src = photo.src;
+      image.alt = photo.alt || 'Ảnh trong bó hoa';
+      image.loading = 'eager';
+      image.decoding = 'async';
+      image.addEventListener('error', () => {
+        // Nếu ảnh bị thiếu, thay bằng minh họa có sẵn để bố cục không bị vỡ.
+        image.src = 'assets/images/flower.svg';
+        image.alt = 'Minh họa hoa pastel';
+      }, { once: true });
+      frame.appendChild(image);
+      bouquetPhotoFan.appendChild(frame);
+    });
+
     const welcomeScreen = document.getElementById('welcomeScreen');
     const letterScreen = document.getElementById('letterScreen');
     const envelopeButton = document.getElementById('envelopeButton');
@@ -83,7 +109,7 @@
         letterScreen.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         burstHearts(16);
-      }, 650);
+      }, 820);
     }
     envelopeButton.addEventListener('click', openLetter);
     document.getElementById('openLetterButton').addEventListener('click', openLetter);
@@ -95,15 +121,34 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    let giftAnimationTimers = [];
+    function clearGiftAnimationTimers() {
+      giftAnimationTimers.forEach((timer) => window.clearTimeout(timer));
+      giftAnimationTimers = [];
+    }
     function openGift() {
-      giftModal.classList.add('show');
+      clearGiftAnimationTimers();
+      giftModal.classList.remove('photos-ready', 'message-ready', 'show');
       giftModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      burstHearts(34);
-      document.getElementById('closeGiftButton').focus();
+      // Bước 1: bó hoa trồi lên. Bước 2: sáu tấm ảnh lần lượt bung ra. Bước 3: lời chúc xuất hiện.
+      void giftModal.offsetWidth;
+      giftModal.classList.add('show');
+      giftAnimationTimers.push(window.setTimeout(() => {
+        giftModal.classList.add('photos-ready');
+        burstHearts(18);
+      }, 1150));
+      giftAnimationTimers.push(window.setTimeout(() => {
+        giftModal.classList.add('message-ready');
+      }, 2450));
+      giftAnimationTimers.push(window.setTimeout(() => {
+        document.getElementById('closeGiftButton').focus({ preventScroll: true });
+      }, 50));
+      burstHearts(12);
     }
     function closeGift() {
-      giftModal.classList.remove('show');
+      clearGiftAnimationTimers();
+      giftModal.classList.remove('show', 'photos-ready', 'message-ready');
       giftModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
